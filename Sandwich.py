@@ -33,6 +33,8 @@ class SandwichSolution:
         Array of crack lengths for each iteration [mm]
     n_Iteration : int
         Number of iterations
+    Title: string 
+        The Title of the generated plot
     dx2 : ndarray
         Array of x-coordinates for the second data set [mm]
     tauxz2 : ndarray
@@ -151,12 +153,17 @@ class SandwichSolution:
         fig.legend()       
         plt.show()
 
-    def plot_stress(self):
+    def plot_stress(self, Title = None):
         """
         Plots the normal stress (sigma_zz) and shear stress (tau_xz) over the x-coordinate of the overlap.
 
         This method is called when stresses are available in the `SandwichSolution` class. It generates a plot
         with the stresses on the y-axis and the x-coordinates of the overlap on the x-axis.
+
+        Attributes
+        ----------
+        Title: string, optional
+            The Title of the generated plot
 
         Raises
         ------
@@ -173,6 +180,8 @@ class SandwichSolution:
         plt.axis([self.dx[0], self.dx[-1], np.min([self.tauxz, self.sigzz]), np.max([self.tauxz, self.sigzz])])
         plt.xlabel('x-coordinate of overlap [mm]')
         plt.ylabel('Stresses [MPa]')
+        if Title != None:
+            plt.title(Title)
         plt.grid(True)
         plt.show()
 
